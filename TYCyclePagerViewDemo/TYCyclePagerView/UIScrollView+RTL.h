@@ -40,6 +40,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (CGFloat)TYRTLValueFromSelf:(CGFloat)v;
 - (CGFloat)TYRTLValueFromRef:(CGFloat)v;
 
++ (BOOL)tyIsRTL;
+
 @end
 
 NS_ASSUME_NONNULL_END

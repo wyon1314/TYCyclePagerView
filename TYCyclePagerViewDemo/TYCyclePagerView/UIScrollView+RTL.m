@@ -24,7 +24,7 @@ static char refWidthKey;
 }
 
 - (void)setTYRTLContentInset:(UIEdgeInsets)TYRTLContentInset {
-    if ([UIScrollView isRTL]) {
+    if ([UIView tyIsRTL]) {
         self.contentInset = UIEdgeInsetsMake(TYRTLContentInset.top,
                                              TYRTLContentInset.right,
                                              TYRTLContentInset.bottom,
@@ -35,7 +35,7 @@ static char refWidthKey;
 }
 
 - (UIEdgeInsets)TYRTLContentInset {
-    if ([UIScrollView isRTL]) {
+    if ([UIView tyIsRTL]) {
         return UIEdgeInsetsMake(self.contentInset.top,
                                 self.contentInset.right,
                                 self.contentInset.bottom,
@@ -46,7 +46,7 @@ static char refWidthKey;
 }
 
 - (void)setTYRTLContentOffset:(CGPoint)TYRTLContentOffset {
-    if ([UIScrollView isRTL]) {
+    if ([UIView tyIsRTL]) {
         CGFloat offsetX = self.wlContentRefWidth - self.bounds.size.width - TYRTLContentOffset.x;
         self.contentOffset = CGPointMake(offsetX, TYRTLContentOffset.y);
     } else {
@@ -55,7 +55,7 @@ static char refWidthKey;
 }
 
 - (CGPoint)TYRTLContentOffset {
-    if ([UIScrollView isRTL]) {
+    if ([UIView tyIsRTL]) {
         CGFloat offsetX = self.wlContentRefWidth - self.bounds.size.width - self.contentOffset.x;
         return CGPointMake(offsetX, self.contentOffset.y);
     } else {
@@ -65,7 +65,7 @@ static char refWidthKey;
 
 - (void)TYRTLSetContentOffset:(CGPoint)contentOffset animated:(BOOL)animated {
     CGPoint offset = contentOffset;
-    if ([UIScrollView isRTL]) {
+    if ([UIView tyIsRTL]) {
         CGFloat offsetX = self.wlContentRefWidth - self.bounds.size.width - contentOffset.x;
         offset = CGPointMake(offsetX, contentOffset.y);
     }
@@ -73,27 +73,16 @@ static char refWidthKey;
 }
 
 - (CGFloat)TYRTLValueFromSelf:(CGFloat)v {
-    return [UIScrollView isRTL] ? (self.wlContentRefWidth - v) : v;
+    return [UIView tyIsRTL] ? (self.wlContentRefWidth - v) : v;
 }
 
 - (CGPoint)TYRTLContentOffset:(CGPoint)offset {
-    if ([UIScrollView isRTL]) {
+    if ([UIView tyIsRTL]) {
         CGFloat offsetX = self.wlContentRefWidth - self.bounds.size.width - offset.x;
         return CGPointMake(offsetX, offset.y);
     } else {
         return offset;
     }
-}
-
-+ (BOOL)isRTL {
-    NSLocale *locale = [NSLocale currentLocale];
-    NSString *languageCode = [locale languageCode];
-    if (!languageCode) {
-        return NO;
-    }
-    
-    NSLocaleLanguageDirection characterDirection = [NSLocale characterDirectionForLanguage:languageCode];
-    return characterDirection == NSLocaleLanguageDirectionRightToLeft;
 }
 
 @end
@@ -112,7 +101,7 @@ static char refWidthKey;
 }
 
 - (void)setTYRTLFrame:(CGRect)TYRTLFrame {
-    if ([self isRTLLang]) {
+    if ([UIView tyIsRTL]) {
         CGFloat x = self.TYRTLRefWidth - CGRectGetMaxX(TYRTLFrame);
         CGRect newFrame = CGRectMake(x, TYRTLFrame.origin.y, TYRTLFrame.size.width, TYRTLFrame.size.height);
         self.frame = newFrame;
@@ -122,7 +111,7 @@ static char refWidthKey;
 }
 
 - (CGRect)TYRTLFrame {
-    if ([self isRTLLang]) {
+    if ([UIView tyIsRTL]) {
         CGFloat x = self.TYRTLRefWidth - CGRectGetMaxX(self.frame);
         return CGRectMake(x, self.frame.origin.y, self.frame.size.width, self.frame.size.height);
     } else {
@@ -131,16 +120,24 @@ static char refWidthKey;
 }
 
 - (void)setTYRTLCenter:(CGPoint)TYRTLCenter {
-    if ([self isRTLLang]) {
+    if ([UIView tyIsRTL]) {
         CGFloat centerX = self.TYRTLRefWidth - TYRTLCenter.x;
         self.center = CGPointMake(centerX, TYRTLCenter.y);
     } else {
         self.center = TYRTLCenter;
     }
 }
+- (CGPoint)TYRTLCenter {
+    if ([UIView tyIsRTL]) {
+        CGFloat x = self.TYRTLRefWidth - self.center.x;
+        return CGPointMake(x, self.center.y);
+    } else {
+        return self.center;
+    }
+}
 
 - (CGFloat)TYRTLX {
-    if ([self isRTLLang]) {
+    if ([UIView tyIsRTL]) {
         CGFloat x = self.TYRTLRefWidth - CGRectGetWidth(self.frame) - self.frame.origin.x;
         return x;
     } else {
@@ -149,7 +146,7 @@ static char refWidthKey;
 }
 
 - (CGFloat)TYRTLMidX {
-    if ([self isRTLLang]) {
+    if ([UIView tyIsRTL]) {
         return self.TYRTLRefWidth - CGRectGetMidX(self.frame);
     } else {
         return CGRectGetMidX(self.frame);
@@ -157,7 +154,7 @@ static char refWidthKey;
 }
 
 - (CGFloat)TYRTLMaxX {
-    if ([self isRTLLang]) {
+    if ([UIView tyIsRTL]) {
         return self.TYRTLRefWidth - self.frame.origin.x;
     } else {
         return CGRectGetMaxX(self.frame);
@@ -165,14 +162,14 @@ static char refWidthKey;
 }
 
 - (CGFloat)TYRTLValueFromSelf:(CGFloat)v {
-    return [self isRTLLang] ? (CGRectGetWidth(self.bounds) - v) : v;
+    return [UIView tyIsRTL] ? (CGRectGetWidth(self.bounds) - v) : v;
 }
 
 - (CGFloat)TYRTLValueFromRef:(CGFloat)v {
-    return [self isRTLLang] ? (self.TYRTLRefWidth - v) : v;
+    return [UIView tyIsRTL] ? (self.TYRTLRefWidth - v) : v;
 }
 
-- (BOOL)isRTLLang {
++ (BOOL)tyIsRTL {
     NSLocale *locale = [NSLocale currentLocale];
     NSString *languageCode = [locale languageCode];
     if (!languageCode) {

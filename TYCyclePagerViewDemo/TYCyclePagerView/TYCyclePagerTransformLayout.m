@@ -7,6 +7,7 @@
 //
 
 #import "TYCyclePagerTransformLayout.h"
+#import "UIScrollView+RTL.h"
 
 typedef NS_ENUM(NSUInteger, TYTransformLayoutItemDirection) {
     TYTransformLayoutItemLeft,
@@ -51,6 +52,10 @@ typedef NS_ENUM(NSUInteger, TYTransformLayoutItemDirection) {
 }
 
 #pragma mark - getter setter
+
+- (BOOL)flipsHorizontallyInOppositeLayoutDirection {
+    return [UIView tyIsRTL];
+}
 
 - (void)setDelegate:(id<TYCyclePagerTransformLayoutDelegate>)delegate {
     _delegate = delegate;
