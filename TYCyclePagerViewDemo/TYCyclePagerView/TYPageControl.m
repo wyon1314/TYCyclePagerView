@@ -7,6 +7,7 @@
 //
 
 #import "TYPageControl.h"
+#import "TYLocalizedTool.h"
 
 @interface TYPageControl ()
 // UI
@@ -45,6 +46,9 @@
     _currentPageIndicatorSize = _pageIndicatorSize;
     _pageIndicatorTintColor = [UIColor colorWithRed:128/255. green:128/255. blue:128/255. alpha:1];
     _currentPageIndicatorTintColor = [UIColor whiteColor];
+    if ([TYLocalizedTool TYIsRTL]) {
+        self.transform = CGAffineTransformMakeRotation(M_PI);
+    }
 }
 
 - (void)willMoveToSuperview:(UIView *)newSuperview {

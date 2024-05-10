@@ -78,6 +78,8 @@ typedef NS_ENUM(NSUInteger, TYCyclePagerScrollDirection) {
 
 @property (nonatomic, weak, nullable) id<TYCyclePagerTransformLayoutDelegate> delegate;
 
++ (BOOL)tyIsRTL;
+
 @end
 
 NS_ASSUME_NONNULL_END

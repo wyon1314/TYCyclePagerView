@@ -7,7 +7,7 @@
 //
 
 #import "TYCyclePagerTransformLayout.h"
-#import "UIScrollView+RTL.h"
+#import "TYLocalizedTool.h"
 
 typedef NS_ENUM(NSUInteger, TYTransformLayoutItemDirection) {
     TYTransformLayoutItemLeft,
@@ -51,10 +51,21 @@ typedef NS_ENUM(NSUInteger, TYTransformLayoutItemDirection) {
     return self;
 }
 
++ (BOOL)tyIsRTL {
+    NSLocale *locale = [NSLocale currentLocale];
+    NSString *languageCode = [locale languageCode];
+    if (!languageCode) {
+        return NO;
+    }
+    
+    NSLocaleLanguageDirection characterDirection = [NSLocale characterDirectionForLanguage:languageCode];
+    return characterDirection == NSLocaleLanguageDirectionRightToLeft;
+}
+
 #pragma mark - getter setter
 
 - (BOOL)flipsHorizontallyInOppositeLayoutDirection {
-    return [UIView tyIsRTL];
+    return [TYLocalizedTool TYIsRTL];
 }
 
 - (void)setDelegate:(id<TYCyclePagerTransformLayoutDelegate>)delegate {

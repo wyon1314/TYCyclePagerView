@@ -18,7 +18,7 @@
 		2B9C0F211F0B2F62009BC0BD /* TYCyclePagerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B9C0F1D1F0B2F62009BC0BD /* TYCyclePagerView.m */; };
 		2B9C0F221F0B2F62009BC0BD /* TYPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B9C0F1F1F0B2F62009BC0BD /* TYPageControl.m */; };
 		2B9C0F251F0B2F96009BC0BD /* TYCyclePagerViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B9C0F241F0B2F96009BC0BD /* TYCyclePagerViewCell.m */; };
-		AB0576D92BEDD90E00A795FB /* UIScrollView+RTL.m in Sources */ = {isa = PBXBuildFile; fileRef = AB0576D82BEDD90E00A795FB /* UIScrollView+RTL.m */; };
+		AB0576DC2BEDEC3100A795FB /* TYLocalizedTool.m in Sources */ = {isa = PBXBuildFile; fileRef = AB0576DA2BEDEC3100A795FB /* TYLocalizedTool.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,8 +53,8 @@
 		2B9C0F1F1F0B2F62009BC0BD /* TYPageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TYPageControl.m; sourceTree = "<group>"; };
 		2B9C0F231F0B2F96009BC0BD /* TYCyclePagerViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TYCyclePagerViewCell.h; sourceTree = "<group>"; };
 		2B9C0F241F0B2F96009BC0BD /* TYCyclePagerViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TYCyclePagerViewCell.m; sourceTree = "<group>"; };
-		AB0576D72BEDD90E00A795FB /* UIScrollView+RTL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+RTL.h"; sourceTree = "<group>"; };
-		AB0576D82BEDD90E00A795FB /* UIScrollView+RTL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+RTL.m"; sourceTree = "<group>"; };
+		AB0576DA2BEDEC3100A795FB /* TYLocalizedTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TYLocalizedTool.m; sourceTree = "<group>"; };
+		AB0576DB2BEDEC3100A795FB /* TYLocalizedTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TYLocalizedTool.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,8 +132,8 @@
 		2B9C0F191F0B2F62009BC0BD /* TYCyclePagerView */ = {
 			isa = PBXGroup;
 			children = (
-				AB0576D72BEDD90E00A795FB /* UIScrollView+RTL.h */,
-				AB0576D82BEDD90E00A795FB /* UIScrollView+RTL.m */,
+				AB0576DB2BEDEC3100A795FB /* TYLocalizedTool.h */,
+				AB0576DA2BEDEC3100A795FB /* TYLocalizedTool.m */,
 				2B9C0F1C1F0B2F62009BC0BD /* TYCyclePagerView.h */,
 				2B9C0F1D1F0B2F62009BC0BD /* TYCyclePagerView.m */,
 				2B9C0F1A1F0B2F62009BC0BD /* TYCyclePagerTransformLayout.h */,
@@ -251,10 +251,10 @@
 			files = (
 				2B9C0EFC1F0B2F32009BC0BD /* ViewController.m in Sources */,
 				2B9C0F221F0B2F62009BC0BD /* TYPageControl.m in Sources */,
-				AB0576D92BEDD90E00A795FB /* UIScrollView+RTL.m in Sources */,
 				2B9C0F211F0B2F62009BC0BD /* TYCyclePagerView.m in Sources */,
 				2B9C0EF91F0B2F32009BC0BD /* AppDelegate.m in Sources */,
 				2B9C0F251F0B2F96009BC0BD /* TYCyclePagerViewCell.m in Sources */,
+				AB0576DC2BEDEC3100A795FB /* TYLocalizedTool.m in Sources */,
 				2B9C0F201F0B2F62009BC0BD /* TYCyclePagerTransformLayout.m in Sources */,
 				2B9C0EF61F0B2F32009BC0BD /* main.m in Sources */,
 			);
