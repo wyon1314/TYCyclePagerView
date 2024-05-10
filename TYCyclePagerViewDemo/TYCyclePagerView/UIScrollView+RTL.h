@@ -13,32 +13,32 @@ NS_ASSUME_NONNULL_BEGIN
 @interface UIScrollView (RTL)
 
 @property (nonatomic, assign) CGFloat wlContentRefWidth;
-@property (nonatomic, assign) UIEdgeInsets wlRTLContentInset;
-@property (nonatomic, assign) CGPoint wlRTLContentOffset;
+@property (nonatomic, assign) UIEdgeInsets TYRTLContentInset;
+@property (nonatomic, assign) CGPoint TYRTLContentOffset;
 
-- (void)wlRTLSetContentOffset:(CGPoint)contentOffset animated:(BOOL)animated;
-- (CGFloat)wlRTLValueFromSelf:(CGFloat)v;
-- (CGPoint)wlRTLContentOffset:(CGPoint)offset;
+- (void)TYRTLSetContentOffset:(CGPoint)contentOffset animated:(BOOL)animated;
+- (CGFloat)TYRTLValueFromSelf:(CGFloat)v;
+- (CGPoint)TYRTLContentOffset:(CGPoint)offset;
 
 @end
 
 @interface UIView (RTL)
 
 
-@property (nonatomic, assign) CGFloat wlRTLRefWidth;
+@property (nonatomic, assign) CGFloat TYRTLRefWidth;
 
-- (void)setWlRTLFrame:(CGRect)wlRTLFrame;
-- (CGRect)wlRTLFrame;
+- (void)setTYRTLFrame:(CGRect)TYRTLFrame;
+- (CGRect)TYRTLFrame;
 
-@property (nonatomic, assign) CGPoint wlRTLCenter;
+@property (nonatomic, assign) CGPoint TYRTLCenter;
 
-@property (nonatomic, assign) CGFloat wlRTLX;
+@property (nonatomic, assign) CGFloat TYRTLX;
 
-@property (nonatomic, readonly) CGFloat wlRTLMidX;
-@property (nonatomic, readonly) CGFloat wlRTLMaxX;
+@property (nonatomic, readonly) CGFloat TYRTLMidX;
+@property (nonatomic, readonly) CGFloat TYRTLMaxX;
 
-- (CGFloat)wlRTLValueFromSelf:(CGFloat)v;
-- (CGFloat)wlRTLValueFromRef:(CGFloat)v;
+- (CGFloat)TYRTLValueFromSelf:(CGFloat)v;
+- (CGFloat)TYRTLValueFromRef:(CGFloat)v;
 
 @end
 

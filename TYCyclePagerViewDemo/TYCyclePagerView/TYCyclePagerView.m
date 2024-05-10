@@ -166,7 +166,7 @@ NS_INLINE TYIndexSection TYMakeIndexSection(NSInteger index, NSInteger section) 
 }
 
 - (CGPoint)contentOffset {
-    return _collectionView.wlRTLContentOffset;
+    return _collectionView.TYRTLContentOffset;
 }
 
 - (BOOL)tracking {
@@ -247,7 +247,7 @@ NS_INLINE TYIndexSection TYMakeIndexSection(NSInteger index, NSInteger section) 
     [self updateLayout];
     _numberOfItems = [_dataSource numberOfItemsInPagerView:self];
     [_collectionView reloadData];
-    if (!_didLayout && !CGRectIsEmpty(self.collectionView.wlRTLFrame) && _indexSection.index < 0) {
+    if (!_didLayout && !CGRectIsEmpty(self.collectionView.TYRTLFrame) && _indexSection.index < 0) {
         _didLayout = YES;
     }
     BOOL needResetIndex = _needResetIndex && _reloadDataNeedResetIndex;
@@ -255,7 +255,7 @@ NS_INLINE TYIndexSection TYMakeIndexSection(NSInteger index, NSInteger section) 
     if (needResetIndex) {
         [self removeTimer];
     }
-    [self resetPagerViewAtIndex:(_indexSection.index < 0 && !CGRectIsEmpty(self.collectionView.wlRTLFrame)) || needResetIndex ? 0 :_indexSection.index];
+    [self resetPagerViewAtIndex:(_indexSection.index < 0 && !CGRectIsEmpty(self.collectionView.TYRTLFrame)) || needResetIndex ? 0 :_indexSection.index];
     if (needResetIndex) {
         [self addTimer];
     }
@@ -291,9 +291,9 @@ NS_INLINE TYIndexSection TYMakeIndexSection(NSInteger index, NSInteger section) 
     }
     CGFloat offset = [self caculateOffsetAtIndexSection:indexSection];
     if (_layout.scrollDirection == TYCyclePagerScrollDirectionVertical) {
-        [_collectionView wlRTLSetContentOffset:CGPointMake(_collectionView.wlRTLContentOffset.x, offset) animated:animate];
+        [_collectionView TYRTLSetContentOffset:CGPointMake(_collectionView.TYRTLContentOffset.x, offset) animated:animate];
     } else {
-        [_collectionView wlRTLSetContentOffset:CGPointMake(offset, _collectionView.wlRTLContentOffset.y) animated:animate];
+        [_collectionView TYRTLSetContentOffset:CGPointMake(offset, _collectionView.TYRTLContentOffset.y) animated:animate];
     }
 }
 
@@ -397,7 +397,7 @@ NS_INLINE TYIndexSection TYMakeIndexSection(NSInteger index, NSInteger section) 
     if (_layout.scrollDirection == TYCyclePagerScrollDirectionVertical) {
         CGFloat offsetY = offset.y;
         CGFloat topEdge = _isInfiniteLoop ? _layout.sectionInset.top : _layout.onlyOneSectionInset.top;
-        CGFloat height = CGRectGetHeight(_collectionView.wlRTLFrame);
+        CGFloat height = CGRectGetHeight(_collectionView.TYRTLFrame);
         CGFloat middleOffset = offsetY + height/2;
         CGFloat itemHeight = layout.itemSize.height + layout.minimumInteritemSpacing;
         NSInteger curIndex = 0;
@@ -415,7 +415,7 @@ NS_INLINE TYIndexSection TYMakeIndexSection(NSInteger index, NSInteger section) 
         return TYMakeIndexSection(curIndex, curSection);
     } else {
         CGFloat leftEdge = _isInfiniteLoop ? _layout.sectionInset.left : _layout.onlyOneSectionInset.left;
-        CGFloat width = CGRectGetWidth(_collectionView.wlRTLFrame);
+        CGFloat width = CGRectGetWidth(_collectionView.TYRTLFrame);
         CGFloat middleOffset = offset.x + width/2;
         CGFloat itemWidth = layout.itemSize.width + layout.minimumInteritemSpacing;
         NSInteger curIndex = 0;
@@ -446,7 +446,7 @@ NS_INLINE TYIndexSection TYMakeIndexSection(NSInteger index, NSInteger section) 
         
         CGFloat topEdge = edge.top;
         CGFloat bottomEdge = edge.bottom;
-        CGFloat height = CGRectGetHeight(_collectionView.wlRTLFrame);
+        CGFloat height = CGRectGetHeight(_collectionView.TYRTLFrame);
         CGFloat itemHeight = layout.itemSize.height + layout.minimumInteritemSpacing;
         CGFloat offsetY = 0;
         if (!_isInfiniteLoop && indexSection.index == _numberOfItems - 1) {
@@ -459,7 +459,7 @@ NS_INLINE TYIndexSection TYMakeIndexSection(NSInteger index, NSInteger section) 
     } else {
         CGFloat leftEdge = edge.left;
         CGFloat rightEdge = edge.right;
-        CGFloat width = CGRectGetWidth(_collectionView.wlRTLFrame);
+        CGFloat width = CGRectGetWidth(_collectionView.TYRTLFrame);
         CGFloat itemWidth = layout.itemSize.width + layout.minimumInteritemSpacing;
         CGFloat offsetX = 0;
         if (!_isInfiniteLoop && !_layout.itemHorizontalCenter && indexSection.index == _numberOfItems - 1) {
@@ -548,7 +548,7 @@ NS_INLINE TYIndexSection TYMakeIndexSection(NSInteger index, NSInteger section) 
     if (!_didLayout) {
         return;
     }
-    TYIndexSection newIndexSection =  [self caculateIndexSectionWithOffset:scrollView.wlRTLContentOffset];
+    TYIndexSection newIndexSection =  [self caculateIndexSectionWithOffset:scrollView.TYRTLContentOffset];
     if (_numberOfItems <= 0 || ![self isValidIndexSection:newIndexSection]) {
         NSLog(@"inVlaidIndexSection:(%ld,%ld)!",(long)newIndexSection.index,(long)newIndexSection.section);
         return;
@@ -570,7 +570,7 @@ NS_INLINE TYIndexSection TYMakeIndexSection(NSInteger index, NSInteger section) 
     if (_autoScrollInterval > 0) {
         [self removeTimer];
     }
-    _beginDragIndexSection = [self caculateIndexSectionWithOffset:scrollView.wlRTLContentOffset];
+    _beginDragIndexSection = [self caculateIndexSectionWithOffset:scrollView.TYRTLContentOffset];
     if ([_delegate respondsToSelector:@selector(pagerViewWillBeginDragging:)]) {
         [_delegate pagerViewWillBeginDragging:self];
     }
@@ -583,7 +583,7 @@ NS_INLINE TYIndexSection TYMakeIndexSection(NSInteger index, NSInteger section) 
             return;
         }
         TYPagerScrollDirection direction = TYPagerScrollDirectionRight;
-        if ((scrollView.wlRTLContentOffset.y < 0 && targetContentOffset->y <= 0) || (targetContentOffset->y < scrollView.wlRTLContentOffset.y && scrollView.wlRTLContentOffset.y < scrollView.contentSize.height - scrollView.wlRTLFrame.size.height)) {
+        if ((scrollView.TYRTLContentOffset.y < 0 && targetContentOffset->y <= 0) || (targetContentOffset->y < scrollView.TYRTLContentOffset.y && scrollView.TYRTLContentOffset.y < scrollView.contentSize.height - scrollView.TYRTLFrame.size.height)) {
             direction = TYPagerScrollDirectionLeft;
         }
         TYIndexSection indexSection = [self nearlyIndexPathForIndexSection:_indexSection direction:direction];
@@ -594,7 +594,7 @@ NS_INLINE TYIndexSection TYMakeIndexSection(NSInteger index, NSInteger section) 
             return;
         }
         TYPagerScrollDirection direction = TYPagerScrollDirectionRight;
-        if ((scrollView.wlRTLContentOffset.x < 0 && targetContentOffset->x <= 0) || (targetContentOffset->x < scrollView.wlRTLContentOffset.x && scrollView.wlRTLContentOffset.x < scrollView.contentSize.width - scrollView.wlRTLFrame.size.width)) {
+        if ((scrollView.TYRTLContentOffset.x < 0 && targetContentOffset->x <= 0) || (targetContentOffset->x < scrollView.TYRTLContentOffset.x && scrollView.TYRTLContentOffset.x < scrollView.contentSize.width - scrollView.TYRTLFrame.size.width)) {
             direction = TYPagerScrollDirectionLeft;
         }
         TYIndexSection indexSection = [self nearlyIndexPathForIndexSection:_indexSection direction:direction];
@@ -647,8 +647,8 @@ NS_INLINE TYIndexSection TYMakeIndexSection(NSInteger index, NSInteger section) 
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-    BOOL needUpdateLayout = !CGRectEqualToRect(_collectionView.wlRTLFrame, self.bounds);
-    _collectionView.wlRTLFrame = self.bounds;
+    BOOL needUpdateLayout = !CGRectEqualToRect(_collectionView.TYRTLFrame, self.bounds);
+    _collectionView.TYRTLFrame = self.bounds;
     if ((_indexSection.section < 0 || needUpdateLayout) && (_numberOfItems > 0 || _didReloadData)) {
         _didLayout = YES;
         [self setNeedUpdateLayout];

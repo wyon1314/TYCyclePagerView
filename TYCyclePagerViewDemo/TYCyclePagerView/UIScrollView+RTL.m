@@ -23,18 +23,18 @@ static char refWidthKey;
     return value ? value.floatValue : self.contentSize.width;
 }
 
-- (void)setWlRTLContentInset:(UIEdgeInsets)wlRTLContentInset {
+- (void)setTYRTLContentInset:(UIEdgeInsets)TYRTLContentInset {
     if ([UIScrollView isRTL]) {
-        self.contentInset = UIEdgeInsetsMake(wlRTLContentInset.top,
-                                             wlRTLContentInset.right,
-                                             wlRTLContentInset.bottom,
-                                             wlRTLContentInset.left);
+        self.contentInset = UIEdgeInsetsMake(TYRTLContentInset.top,
+                                             TYRTLContentInset.right,
+                                             TYRTLContentInset.bottom,
+                                             TYRTLContentInset.left);
     } else {
-        self.contentInset = wlRTLContentInset;
+        self.contentInset = TYRTLContentInset;
     }
 }
 
-- (UIEdgeInsets)wlRTLContentInset {
+- (UIEdgeInsets)TYRTLContentInset {
     if ([UIScrollView isRTL]) {
         return UIEdgeInsetsMake(self.contentInset.top,
                                 self.contentInset.right,
@@ -45,16 +45,16 @@ static char refWidthKey;
     }
 }
 
-- (void)setWlRTLContentOffset:(CGPoint)wlRTLContentOffset {
+- (void)setTYRTLContentOffset:(CGPoint)TYRTLContentOffset {
     if ([UIScrollView isRTL]) {
-        CGFloat offsetX = self.wlContentRefWidth - self.bounds.size.width - wlRTLContentOffset.x;
-        self.contentOffset = CGPointMake(offsetX, wlRTLContentOffset.y);
+        CGFloat offsetX = self.wlContentRefWidth - self.bounds.size.width - TYRTLContentOffset.x;
+        self.contentOffset = CGPointMake(offsetX, TYRTLContentOffset.y);
     } else {
-        self.contentOffset = wlRTLContentOffset;
+        self.contentOffset = TYRTLContentOffset;
     }
 }
 
-- (CGPoint)wlRTLContentOffset {
+- (CGPoint)TYRTLContentOffset {
     if ([UIScrollView isRTL]) {
         CGFloat offsetX = self.wlContentRefWidth - self.bounds.size.width - self.contentOffset.x;
         return CGPointMake(offsetX, self.contentOffset.y);
@@ -63,7 +63,7 @@ static char refWidthKey;
     }
 }
 
-- (void)wlRTLSetContentOffset:(CGPoint)contentOffset animated:(BOOL)animated {
+- (void)TYRTLSetContentOffset:(CGPoint)contentOffset animated:(BOOL)animated {
     CGPoint offset = contentOffset;
     if ([UIScrollView isRTL]) {
         CGFloat offsetX = self.wlContentRefWidth - self.bounds.size.width - contentOffset.x;
@@ -72,11 +72,11 @@ static char refWidthKey;
     [self setContentOffset:offset animated:animated];
 }
 
-- (CGFloat)wlRTLValueFromSelf:(CGFloat)v {
+- (CGFloat)TYRTLValueFromSelf:(CGFloat)v {
     return [UIScrollView isRTL] ? (self.wlContentRefWidth - v) : v;
 }
 
-- (CGPoint)wlRTLContentOffset:(CGPoint)offset {
+- (CGPoint)TYRTLContentOffset:(CGPoint)offset {
     if ([UIScrollView isRTL]) {
         CGFloat offsetX = self.wlContentRefWidth - self.bounds.size.width - offset.x;
         return CGPointMake(offsetX, offset.y);
@@ -102,74 +102,74 @@ static char refWidthKey;
 
 @implementation UIView (RTL)
 
-- (void)setWlRTLRefWidth:(CGFloat)wlRTLRefWidth {
-    objc_setAssociatedObject(self, &refWidthKey, @(wlRTLRefWidth), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+- (void)setTYRTLRefWidth:(CGFloat)TYRTLRefWidth {
+    objc_setAssociatedObject(self, &refWidthKey, @(TYRTLRefWidth), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
-- (CGFloat)wlRTLRefWidth {
+- (CGFloat)TYRTLRefWidth {
     NSNumber *value = objc_getAssociatedObject(self, &refWidthKey);
     return value ? value.floatValue : (self.superview ? CGRectGetMaxX(self.superview.bounds) : 0);
 }
 
-- (void)setWlRTLFrame:(CGRect)wlRTLFrame {
+- (void)setTYRTLFrame:(CGRect)TYRTLFrame {
     if ([self isRTLLang]) {
-        CGFloat x = self.wlRTLRefWidth - CGRectGetMaxX(wlRTLFrame);
-        CGRect newFrame = CGRectMake(x, wlRTLFrame.origin.y, wlRTLFrame.size.width, wlRTLFrame.size.height);
+        CGFloat x = self.TYRTLRefWidth - CGRectGetMaxX(TYRTLFrame);
+        CGRect newFrame = CGRectMake(x, TYRTLFrame.origin.y, TYRTLFrame.size.width, TYRTLFrame.size.height);
         self.frame = newFrame;
     } else {
-        self.frame = wlRTLFrame;
+        self.frame = TYRTLFrame;
     }
 }
 
-- (CGRect)wlRTLFrame {
+- (CGRect)TYRTLFrame {
     if ([self isRTLLang]) {
-        CGFloat x = self.wlRTLRefWidth - CGRectGetMaxX(self.frame);
+        CGFloat x = self.TYRTLRefWidth - CGRectGetMaxX(self.frame);
         return CGRectMake(x, self.frame.origin.y, self.frame.size.width, self.frame.size.height);
     } else {
         return self.frame;
     }
 }
 
-- (void)setWlRTLCenter:(CGPoint)wlRTLCenter {
+- (void)setTYRTLCenter:(CGPoint)TYRTLCenter {
     if ([self isRTLLang]) {
-        CGFloat centerX = self.wlRTLRefWidth - wlRTLCenter.x;
-        self.center = CGPointMake(centerX, wlRTLCenter.y);
+        CGFloat centerX = self.TYRTLRefWidth - TYRTLCenter.x;
+        self.center = CGPointMake(centerX, TYRTLCenter.y);
     } else {
-        self.center = wlRTLCenter;
+        self.center = TYRTLCenter;
     }
 }
 
-- (CGFloat)wlRTLX {
+- (CGFloat)TYRTLX {
     if ([self isRTLLang]) {
-        CGFloat x = self.wlRTLRefWidth - CGRectGetWidth(self.frame) - self.frame.origin.x;
+        CGFloat x = self.TYRTLRefWidth - CGRectGetWidth(self.frame) - self.frame.origin.x;
         return x;
     } else {
         return self.frame.origin.x;
     }
 }
 
-- (CGFloat)wlRTLMidX {
+- (CGFloat)TYRTLMidX {
     if ([self isRTLLang]) {
-        return self.wlRTLRefWidth - CGRectGetMidX(self.frame);
+        return self.TYRTLRefWidth - CGRectGetMidX(self.frame);
     } else {
         return CGRectGetMidX(self.frame);
     }
 }
 
-- (CGFloat)wlRTLMaxX {
+- (CGFloat)TYRTLMaxX {
     if ([self isRTLLang]) {
-        return self.wlRTLRefWidth - self.frame.origin.x;
+        return self.TYRTLRefWidth - self.frame.origin.x;
     } else {
         return CGRectGetMaxX(self.frame);
     }
 }
 
-- (CGFloat)wlRTLValueFromSelf:(CGFloat)v {
+- (CGFloat)TYRTLValueFromSelf:(CGFloat)v {
     return [self isRTLLang] ? (CGRectGetWidth(self.bounds) - v) : v;
 }
 
-- (CGFloat)wlRTLValueFromRef:(CGFloat)v {
-    return [self isRTLLang] ? (self.wlRTLRefWidth - v) : v;
+- (CGFloat)TYRTLValueFromRef:(CGFloat)v {
+    return [self isRTLLang] ? (self.TYRTLRefWidth - v) : v;
 }
 
 - (BOOL)isRTLLang {
